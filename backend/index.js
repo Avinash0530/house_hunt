@@ -12,14 +12,17 @@ dotenv.config();
 //////connection to DB/////////////////
 connectionofDb();
 
-///////////////port number///////////////////
-const PORT = process.env.PORT || 8000;
 
-/////////////////middlewares////////////////
+const PORT = process.env.PORT || 8001;
+
+
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin:'http://localhost:3000',
+  methods:['GET','POST']
+}));
 
-/////////////////routes/////////////////////
+
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.use('/api/user', require('./routes/userRoutes.js'))
